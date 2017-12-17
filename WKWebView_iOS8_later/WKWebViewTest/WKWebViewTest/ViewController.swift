@@ -39,8 +39,8 @@ class ViewController: UIViewController {
         ]
         request.httpBody = try! JSONSerialization.data(withJSONObject: params)
         
-        taskExcute(request: request as URLRequest)
-        //webView.load(request as URLRequest)
+//        taskExcute(request: request as URLRequest)
+        webView.load(request as URLRequest)
     }
     
     fileprivate func taskExcute(request: URLRequest) {
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
 extension ViewController: WKUIDelegate, WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
 
-        guard let _ = navigationAction.request.allHTTPHeaderFields?["RBD"] else {
+        guard let _ = navigationAction.request.allHTTPHeaderFields?["X-APP"] else {
             var request = navigationAction.request
             request.addValue("RBD", forHTTPHeaderField: "X-APP")
             request.addValue("1", forHTTPHeaderField: "version")
